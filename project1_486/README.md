@@ -86,3 +86,41 @@ I then used the pivot table to isolate out values and sums for a few different e
 ![image](https://user-images.githubusercontent.com/2071451/112570907-4a4fa100-8dbd-11eb-821a-b5390ac7c4ff.png)
 
 In QGIS, I used _Join attributes by field value_ and specified one-to-many, creating 12 State polygons for each state. Finally, I used Temporal filtering to assign each state polygon a datetime based on its Month value. Now we can make temporal animations.
+
+### Analysis
+
+See above for the preliminary analysis that I did on the Maryland data.
+
+I will discuss some analysis in the output section below.
+
+### Outputs
+
+I created several animated maps using this data, mostly choropleths.
+
+**Renewables proportion over the year:**
+
+![renewables_time](https://user-images.githubusercontent.com/2071451/112573371-89342580-8dc2-11eb-9c7d-8c242ecba80d.gif)
+
+As I predicted with the MD graph, the change in renewables production throughout the year seems pretty low. It seems like the renewables fraction actually intensifies a bit in later summer - perhaps that's solar at work? Let's check.
+
+**Solar proportion:**
+
+![solar](https://user-images.githubusercontent.com/2071451/112574166-26dc2480-8dc4-11eb-97cd-2c47eeaba126.gif)
+
+Solar definitely does intensify in summer for some states, mostly in the southwest. I wonder if this is due to them using thermal "mirror" plants instead of photovoltaic, so it's more dependent on actual heat. The data doesn't differentiate thermal vs. photovoltaic.
+
+Let's also check wind, though.
+
+**Wind proportion:**
+
+![wind](https://user-images.githubusercontent.com/2071451/112574392-89352500-8dc4-11eb-8c90-c12c980a60a3.gif)
+
+Wind is kind of sporadic. It definitely does seem to intensify a bit later in the summer, in the northern states.
+
+**Natural gas proportion over the year:**
+
+And finally:
+
+![natgas](https://user-images.githubusercontent.com/2071451/112573841-7a9a3e00-8dc3-11eb-8a7d-3b8e4cecbe5c.gif)
+
+I'm pretty happy with this one. You can really see how the gas-fired peaker plants start to come online later in the summer as more people start using AC - or that's my theory, at least.
