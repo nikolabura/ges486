@@ -117,10 +117,28 @@ Let's also check wind, though.
 
 Wind is kind of sporadic. It definitely does seem to intensify a bit later in the summer, in the northern states.
 
-**Natural gas proportion over the year:**
+Let's check one more choropleth.
 
-And finally:
+**Natural gas proportion over the year:**
 
 ![natgas](https://user-images.githubusercontent.com/2071451/112573841-7a9a3e00-8dc3-11eb-8a7d-3b8e4cecbe5c.gif)
 
 I'm pretty happy with this one. You can really see how the gas-fired peaker plants start to come online later in the summer as more people start using AC - or that's my theory, at least.
+
+And now for something a bit different:
+
+**Proportion of coal, natural gas, and non-fossil-fuels:**
+
+I know everyone hates the pie chart maps, but I just had to do it...
+
+![piecharts](https://user-images.githubusercontent.com/2071451/112576055-e54d7880-8dc7-11eb-8e2a-c864151b234e.gif)
+
+- Purple: Coal
+- Yellow: Natural Gas
+- Green: Non-Fossil-Fuels
+
+It's definitely a bit hard to read, but definitely useful for tracking the performance of individual states. Though you could also admittedly do that with a regular old line chart.
+
+_Note_: The green category might be surprisingly large for some states, this is likely because it contains nuclear and hydro.
+
+That's all!
