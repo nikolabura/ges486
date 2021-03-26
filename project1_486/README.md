@@ -48,3 +48,41 @@ The analysis for part 1 can be done purely visually. I did my analysis by lookin
 
 Part 1 yields one output, `Wind Turbines and Turbine Suitability.pdf`. Preview:
 ![image](https://user-images.githubusercontent.com/2071451/112563799-6ef14c00-8db0-11eb-8836-69520a29158b.png)
+
+## 2 - Energy Mix Throughout the Year
+
+### Topic
+
+The _energy mix_ describes the proportion of electricity which is provided by a particular energy source. Of particular interest, for obvious environmental reasons, is the mix between renewable and nonrenewable energy. Several countries have achieved 100% renewable energy days, but it is usually sporadic.
+
+Here, I'll try to investigate how the energy mix changes for US states over the course of a year (2019). For example, I want to see if some states fall back to nonrenewable energy during winter, or whether AC usage in summer or electric heating in winter creates high demand, requiring the use of nonrenewable power or even natural gas peaker plants.
+
+My personal hypothesis is that the proportion of nonrenewable energy will become higher during winter.
+
+### Data
+
+The only data source needed here is the electric generation totals (in megawatthours), per each state, per each month, per each type of energy source. The USA Energy Information Administration once again provides this data, at https://www.eia.gov/electricity/data/state/ (see _Net Generation by State by Type of Producer by Energy Source_).
+
+For future research, it might be interesting to visualize some of the other data sources here, such as _Fossil Fuel Consumption for Electricity Generation by Year, Industry Type and State_. I will not do so for this project, though.
+
+### Transformation and Subset
+
+For processing of the data, I used LibreOffice Calc, as it is provided in XLSX format. I took the 2018 sheet and created a pivot table, allowing me to subset for _Total Electric Power Industry_ (not heating, etc), group by state, and sum up multiple generation sources by checkbox.
+
+![image](https://user-images.githubusercontent.com/2071451/112567082-94815400-8db6-11eb-89e8-ad5cfd49c09f.png)
+
+#### Preliminary Analysis
+
+To get started, I used the pivot table to grab just Maryland's data for Coal vs Natural Gas, and found that there was already a visible pattern.
+
+![image](https://user-images.githubusercontent.com/2071451/112566162-d7dac300-8db4-11eb-94cf-ea6d3bd7f6b2.png)
+
+Natural gas really takes off in summer. I suspect this is due to operation of natural gas peaker plants to satisfy sporadic demand from people running AC, but I'm really not sure! In any case, it's good to see that there are some trends. It is disappointing to see that the total fossil-fuel fraction is relatively constant throughout the year, though.
+
+#### Joining
+
+I then used the pivot table to isolate out values and sums for a few different energy sources - coal, gas, the set of renewables, solar, wind... I copy-pasted each column over to a new spreadsheet.
+
+![image](https://user-images.githubusercontent.com/2071451/112570907-4a4fa100-8dbd-11eb-821a-b5390ac7c4ff.png)
+
+In QGIS, I used _Join attributes by field value_ and specified one-to-many, creating 12 State polygons for each state. Finally, I used Temporal filtering to assign each state polygon a datetime based on its Month value. Now we can make temporal animations.
