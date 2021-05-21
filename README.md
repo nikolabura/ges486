@@ -1,5 +1,7 @@
-# GES486 UMBC Nikola Bura
+---
+title: Nikola Bura: GES486
+---
 
-Root dir
+# GES486 Portfolio
 
-edit
+Welcome to my portfolio page for GES486 at UMBC!
