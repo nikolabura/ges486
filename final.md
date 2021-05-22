@@ -208,7 +208,7 @@ Upon closer inspection, paths were found to Harrisonburg (blue marker) via Mt Ho
 ![image](https://user-images.githubusercontent.com/2071451/119214486-42e30600-ba95-11eb-8dc0-caa45d63af22.png)
 
 The Tysons Corner Tower was discovered by the propagator since both it and Mt Weather apparently link to a site in Puerto Rico.
-Microwave links can't that far; the Earth's curvature would definitely interfere at that point.
+Microwave links can't reach that far; the Earth's curvature would definitely interfere at that point.
 I think I can safely assume this is a misplacement / glitch in the FCC data, or in my interpretation of it.
 
 Looking [at MAPRAD](https://maprad.io/us/search/site/399273772969?source=US) reveals that license WLM57*6* is a link from Tysons to Mt. Weather, while FCCLE somehow hooked onto license WLM57*5*, which is a [TV "intercity relay"](https://maprad.io/us/search/licence/WLM575/system/WLM575_1_0?source=US) in Puerto Rico. How strange - I'll have to look into why this error happened later.
