@@ -8,7 +8,7 @@ First things first. The web app can be accessed [via this link](http://umbcsad.c
 
 [<img src="https://user-images.githubusercontent.com/2071451/119211568-de1db080-ba80-11eb-88b8-1544356269b4.png">](http://umbcsad.crabdance.com/)
 
-For an explanation of how to use the app, please see the Usage section below. Source code is available at https://github.com/nikolabura/fccle.
+For an explanation of how to use the app, please see the Usage section below. Source code is available at [https://github.com/nikolabura/fccle](https://github.com/nikolabura/fccle).
 
 ## [2] Write-Up
 
@@ -51,13 +51,20 @@ In the upper-right corner, you can access the **Layers control** and switch betw
 - OpenStreetMap: Just OSM
 - Microwave Tower Dots: A WSM map of the microwave tower data, rendered by a Geoserver install on the backend. Very useful for large-scale viewing.
 
-Finally, you can also load in pager antenna locations by clicking the **Load Paging Towers in Area** button.
+Finally, you can also load in pager antenna locations by clicking the **Load Paging Towers in Area** button. You can click on each paging tower to view the frequency it uses.
 
 ## [3,4] Analysis and Reproducibility
 
-Firstly, the FCC data is distributed as archives full of `.dat` files. They are text files, and are pipe-delimited - yes, really, like the `|` character. Weird choice, but sure. Documentation is available [here](https://www.fcc.gov/wireless/data/public-access-files-database-downloads).
+My FCC data was sourced from [here](https://www.fcc.gov/uls/transactions/daily-weekly). I used the following ZIP files:
+
+- Microwave: `ftp://wirelessftp.fcc.gov/pub/uls/complete/l_micro.zip`
+    - Within Microwave, I made use of `LO.dat` for locations and `PA.dat` for paths.
+- Paging: `ftp://wirelessftp.fcc.gov/pub/uls/complete/l_paging.zip`
+    - Within Paging, I made use of `LO.dat` for locations and `EM.dat` for "emissions" (frequency).
+
+The FCC data is distributed as archives full of `.dat` files. They are text files, and are pipe-delimited - yes, really, like the `|` character. Weird choice, but sure. Documentation is available [here](https://www.fcc.gov/wireless/data/public-access-files-database-downloads).
 [This PDF](https://www.fcc.gov/sites/default/files/pubacc_tbl_abbr_names_08212007.pdf) lists the meaning of each acronym. The one that's most important to us is the `LO` file, which indicates the geographic location of each antenna site. It's in NAD83, Degrees Minutes Seconds form, with the D, M, S, and direction being in separate fields.
-I wrote a Python script to process a LO file and tack on a decimal degrees field; it's available in `utils/process_fcc_dat_to_coords.py`.
+I wrote a Python script to process an LO file and tack on a decimal degrees field; it's available in `utils/process_fcc_dat_to_coords.py`.
 Then, I imported the file into QGIS using Delimited Text Import.
 
 ![image](https://user-images.githubusercontent.com/2071451/119213113-e7ac1600-ba8a-11eb-9462-d50f0713de30.png)
@@ -106,3 +113,28 @@ fetch("/api/microwave_towers?swlat=" + swlat + "&swlon=" + swlon
 ```
 
 ... and fetch the microwave tower JSON. It later checks incoming feature IDs to prevent duplication.
+
+Fetching the paths for a given tower is also done with SQL. In these FCC datasets, individual antennas are identified by a combination of the _callsign_ and the _location number_ (or at least that's the theory - I found that often the data was messier than that).
+
+```sql
+SELECT * FROM fccle.microwave_paths m
+WHERE
+    (m.callsign = %s AND m.transmit_location_number = %s)
+    OR (m.receiver_callsign = %s AND m.receiver_location_number = %s)
+```
+
+Finally, propagation/recursion - drawing links from Tower A to B to C to D, etc. - is all done on the client side, within the `pathTrace` function of `fccle.js`.
+This approach is hugely inefficient, to be honest. A far better approach would be to run it on the server, either in Python or as a recursive query in SQL (the latter option could probably even give near-instantaneous results given PostgreSQL's efficiency).
+This is definitely a good thing to optimize in the future.
+
+For my basemaps, I made use of Stamen Terrain, CartoDB's Positron map, ESRI's World Imagery, and openstreetmap.org's default Mapnik layer. These are visible near the top of `fccle.js`.
+
+## [5] Final Output
+
+I suppose my final output is the web map / web app itself.
+
+If a static map is desired, I used the Export buttons to export the GeoJSON for some microwave paths, and moved them into QGIS. I acquired Frederick DEM (elevation) data from USGS AρρEEARS, and ran the QGIS Viewshed tool to get the viewshed (points visible as line-of-sight) for the peak of Gambrill Mountain, where a lot of microwave towers are located. In the map below, the bright areas are within the viewshed; the dark areas are outside of it.
+
+![viewshed](https://user-images.githubusercontent.com/2071451/119213675-eda3f600-ba8e-11eb-854e-d599bcaef86e.png)
+
+It's cool to see how, sure enough, the microwave links almost entirely go to sites within the viewshed. The colored elevation overlay also shows how they link from one mountaintop to the other.
