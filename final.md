@@ -19,6 +19,6 @@ In the US, these antenna and paths are registered with the FCC, which makes them
 
 Common uses of microwave links include cellular network backbone (when it's too expensive or remote to trench a fiber optic cable all the way to the cell site), internal data transfer for television companies, linking [TV and radio studios](https://en.wikipedia.org/wiki/Studio_transmitter_link) to mountaintop transmitters, extremely-low-latency communications for high-frequency-trading firms, and backup communications for emergency situations.
 
-<img align="right" src="https://cdn.discordapp.com/attachments/552980096315686955/845486202828095508/20210520_183217_HDR.jpg">
+<img align="right" src="https://cdn.discordapp.com/attachments/552980096315686955/845486202828095508/20210520_183217_HDR.jpg" width="100px">
 
 ### Paging Towers
