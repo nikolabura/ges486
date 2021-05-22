@@ -166,7 +166,7 @@ Speak of the devil: Above, next to this factory/plant in Elrama, a microwave lin
 
 ![image](https://user-images.githubusercontent.com/2071451/119214186-dbc45200-ba92-11eb-9e73-9245c8c10857.png)
 
-The UMBC radio tower (pictured in "Write Up" above) links to Gambrill Mountain in Frederick, callsign `WQML415` in DC, and a site in nearby Baltimore.
+The UMBC radio tower (pictured in "Write Up" above) links to Gambrill Mountain in Frederick, callsign `WQML415` in DC (owned [by BGE](https://wireless2.fcc.gov/UlsApp/UlsSearch/licenseAdminSum.jsp?licKey=3227469)), and a site in nearby Baltimore.
 
 ## High-Frequency Trading
 
@@ -235,3 +235,11 @@ As it turns out, it's not just because of low population density! That gap is ju
     - OpenStreetMap Mapnik: https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
 
 Source code is available at [https://github.com/nikolabura/fccle](https://github.com/nikolabura/fccle).
+
+# Discussion & Future Work
+
+I'm pretty happy with this project, but it does have some flaws that could be addressed.
+
+- Optimization of the "propagator" / path tracer. Just run it on the server and performance improves a lot. I do kind of enjoy watching it slowly reveal paths one-by-one, though - reminds me of those hacking scenes in movies. :)
+- More data visible per each tower or link, particularly, ownership data. I was going to import the `EN.dat` ("entity") file which contains this info, and add an API call for it, but didn't have time.
+- Maybe some search or filtering options - show only towers and paths owned by some company, show only towers taller than _x_ meters, etc. (The former would require ownership data to be set up, obviously.) Then, this would be easy enough to implement on the client side with JS, or on the server with a SQL WHERE statement.
