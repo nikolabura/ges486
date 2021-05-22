@@ -12,7 +12,7 @@ For an explanation of how to use the app, please see the Usage section below.
 
 Finally, **source code is available at [https://github.com/nikolabura/fccle](https://github.com/nikolabura/fccle).**
 
-## [2] Write-Up
+# [2] Write-Up
 
 ### Microwave Towers
 
@@ -33,7 +33,7 @@ To the right is an image of the UMBC campus' radio tower. One microwave antenna 
 
 The FCC actually publishes a wide variety of databases; microwave represents just one of several export options. In the interest of variety, I also downloaded and processed the database of paging towers. (Hey, pagers are still a thing!) The main focus of the project, however, is on the microwave links.
 
-## Usage
+# Usage
 
 To use [the web app](http://umbcsad.crabdance.com/)), pan to the area you wish to analyze, zoom in on it, and click the **Load Microwave Towers in Area** button. The map will be populated with clusters representing microwave towers. You can click on the clusters to zoom in on them; though, some represent co-located antennas on the same tower, so zooming won't help there.
 
@@ -55,7 +55,7 @@ In the upper-right corner, you can access the **Layers control** and switch betw
 
 Finally, you can also load in pager antenna locations by clicking the **Load Paging Towers in Area** button. You can click on each paging tower to view the frequency it uses.
 
-## [3,4] Analysis and Reproducibility
+# [3,4] Analysis and Reproducibility
 
 My FCC data was sourced from [here](https://www.fcc.gov/uls/transactions/daily-weekly). I used the following ZIP files:
 
@@ -131,7 +131,7 @@ This is definitely a good thing to optimize in the future.
 
 For my basemaps, I made use of Stamen Terrain, CartoDB's Positron map, ESRI's World Imagery, and openstreetmap.org's default Mapnik layer. These are visible near the top of `fccle.js`.
 
-## [5] Final Output
+# [5] Final Output
 
 I suppose my final output is the web map / web app itself.
 
@@ -141,11 +141,11 @@ If a static map is desired, I used the Export buttons to export the GeoJSON for 
 
 It's cool to see how, sure enough, the microwave links almost entirely go to sites within the viewshed. The colored elevation overlay also shows how they link from one mountaintop to the other.
 
-## [6] Maps
+# [6] Maps
 
 Here are some selected maps I made using the web app; I found them interesting.
 
-### Microwave Networks
+## Microwave Networks
 
 ![hagerstown](https://user-images.githubusercontent.com/2071451/119214044-b84cd780-ba91-11eb-9f6d-cf240f956f39.png)
 
@@ -223,7 +223,7 @@ The heatmap does reveal an interesting "gap" in West Virginia, though. That spot
 
 As it turns out, it's not just because of low population density! That gap is just a few miles from the [Green Bank Telescope](https://en.wikipedia.org/wiki/Green_Bank_Telescope), and is located very close to the center of the [National Radio Quiet Zone](https://en.wikipedia.org/wiki/United_States_National_Radio_Quiet_Zone).
 
-# [7]
+# [7] Data
 
 - Microwave: ftp://wirelessftp.fcc.gov/pub/uls/complete/l_micro.zip
 - Paging: ftp://wirelessftp.fcc.gov/pub/uls/complete/l_paging.zip
