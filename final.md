@@ -211,7 +211,7 @@ The Tysons Corner Tower was discovered by the propagator since both it and Mt We
 I didn't even know microwave links can go that far; the Earth's curvature would definitely interfere at that point.
 I kind of assume this is a misplacement / glitch in the FCC data, but how weird.
 
-## QGIS Analysis
+## QGIS: Heatmap
 
 I did some analysis of the original tower location data in QGIS (no paths).
 
@@ -240,6 +240,8 @@ Source code is available at [https://github.com/nikolabura/fccle](https://github
 
 I'm pretty happy with this project, but it does have some flaws that could be addressed.
 
-- Optimization of the "propagator" / path tracer. Just run it on the server and performance improves a lot. I do kind of enjoy watching it slowly reveal paths one-by-one, though - reminds me of those hacking scenes in movies. :)
+- Optimization of the "propagator" / path tracer. Just run it on the server and performance would likely improve a lot. I do kind of enjoy watching it slowly reveal paths one-by-one, though - reminds me of those hacking scenes in movies. :)
 - More data visible per each tower or link, particularly, ownership data. I was going to import the `EN.dat` ("entity") file which contains this info, and add an API call for it, but didn't have time.
 - Maybe some search or filtering options - show only towers and paths owned by some company, show only towers taller than _x_ meters, etc. (The former would require ownership data to be set up, obviously.) Then, this would be easy enough to implement on the client side with JS, or on the server with a SQL WHERE statement.
+
+![image](https://user-images.githubusercontent.com/2071451/119215485-f4853580-ba9b-11eb-8f62-f8465ba6b14b.png)
