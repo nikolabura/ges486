@@ -248,3 +248,4 @@ I'm pretty happy with this project, but it does have some flaws that could be ad
 
 ![image](https://user-images.githubusercontent.com/2071451/119215670-21861800-ba9d-11eb-9db1-2d8b0e69ee39.png)
 
+To return to the home page, [click here](/ges486).
