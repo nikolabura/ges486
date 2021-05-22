@@ -19,7 +19,7 @@ Finally, **source code is available at [https://github.com/nikolabura/fccle](htt
 The main goal of this project was to analyze FCC records of microwave towers and microwave paths.
 [Microwave radio](https://en.wikipedia.org/wiki/Microwave_transmission), on the large/outdoor scale, is commonly used for _point-to-point_ communications, meaning that as opposed to traditional omnidirectional broadcasting, there is a transmitter antenna, a reciever antenna, and a straight line-of-sight path between the two.
 
-In the US, these antenna and paths are registered with the FCC, which makes them available for download through the [ULS database weekly export](https://www.fcc.gov/uls/transactions/daily-weekly#fcc-uls-transaction-files-weekly).
+In the US, these antennas and paths are registered with the FCC, which makes them available for download through the [ULS database weekly export](https://www.fcc.gov/uls/transactions/daily-weekly#fcc-uls-transaction-files-weekly).
 
 Common uses of microwave links include [cellular network backhaul](https://en.wikipedia.org/wiki/Backhaul_(telecommunications)) (when it's too expensive or remote to run a fiber optic cable all the way to the cell site), [internal data transfer](https://en.wikipedia.org/wiki/Cable_television_headend) for television companies, linking [TV and radio studios](https://en.wikipedia.org/wiki/Studio_transmitter_link) to mountaintop transmitters, extremely-low-latency communications for [high-frequency-trading firms](https://www.bloomberg.com/news/features/2019-03-08/the-gazillion-dollar-standoff-over-two-high-frequency-trading-towers), and backup communications for emergency situations.
 
@@ -35,7 +35,7 @@ The FCC actually publishes a wide variety of databases; microwave represents jus
 
 # Usage
 
-To use [the web app](http://umbcsad.crabdance.com/)), pan to the area you wish to analyze, zoom in on it, and click the **Load Microwave Towers in Area** button. The map will be populated with clusters representing microwave towers. You can click on the clusters to zoom in on them; though, some represent co-located antennas on the same tower, so zooming won't help there.
+To use [the web app](http://umbcsad.crabdance.com/), pan to the area you wish to analyze, zoom in on it, and click the **Load Microwave Towers in Area** button. The map will be populated with clusters representing microwave towers. You can click on the clusters to zoom in on them; though, some represent co-located antennas on the same tower, so zooming won't help there.
 
 You can click on an individual antenna (blue marker) to view its callsign and **total height**. The popup also gives you a **Path Trace** button. If you click it, the app will contact the server, check if there are any registered paths associated with that particular antenna, and draw them out.
 
@@ -166,7 +166,7 @@ Speak of the devil: Above, next to this factory/plant in Elrama, a microwave lin
 
 ![image](https://user-images.githubusercontent.com/2071451/119214186-dbc45200-ba92-11eb-9e73-9245c8c10857.png)
 
-The UMBC radio tower (pictured in "Write Up" above) links to Gambrill Mountain in Frederick, callsign `WQML415` in DC (owned [by BGE](https://wireless2.fcc.gov/UlsApp/UlsSearch/licenseAdminSum.jsp?licKey=3227469)), and a site in nearby Baltimore.
+The UMBC radio tower (pictured in "Write Up" above) links to Gambrill Mountain in Frederick, callsign `WQML415` in DC (owned [by BGE](https://wireless2.fcc.gov/UlsApp/UlsSearch/licenseAdminSum.jsp?licKey=3227469)), and a telephone exchange in nearby Baltimore.
 
 ## High-Frequency Trading
 
@@ -203,25 +203,27 @@ And what about links?
 
 ![image](https://user-images.githubusercontent.com/2071451/119214405-a6206880-ba94-11eb-99ff-cf0906e949db.png)
 
-Upon closer inspection, paths were found to Harrisonburg (blue marker) via Mt Hogback (6), Clear Spring (5), and an AT&T [Project Office](https://en.wikipedia.org/wiki/Project_Offices) (2) by Short Hill Mountain. The (2) on the right near DC is the [Tysons Corner Communications Tower](https://en.wikipedia.org/wiki/Tysons_Corner_Communications_Tower), but why isn't it directly linked?
+Upon closer inspection, paths were found to Harrisonburg (blue marker) via Mt Hogback (6), to Clear Spring (5), and to an AT&T [Project Office](https://en.wikipedia.org/wiki/Project_Offices) (2) by Short Hill Mountain. The (2) on the right near DC is the [Tysons Corner Communications Tower](https://en.wikipedia.org/wiki/Tysons_Corner_Communications_Tower), but why isn't it directly linked?
 
 ![image](https://user-images.githubusercontent.com/2071451/119214486-42e30600-ba95-11eb-8dc0-caa45d63af22.png)
 
 The Tysons Corner Tower was discovered by the propagator since both it and Mt Weather apparently link to a site in Puerto Rico.
-I didn't even know microwave links can go that far; the Earth's curvature would definitely interfere at that point.
-I kind of assume this is a misplacement / glitch in the FCC data, but how weird.
+Microwave links can't that far; the Earth's curvature would definitely interfere at that point.
+I think I can safely assume this is a misplacement / glitch in the FCC data, or in my interpretation of it.
+
+Looking [at MAPRAD](https://maprad.io/us/search/site/399273772969?source=US) reveals that license WLM57_6_ is a link from Tysons to Mt. Weather, while FCCLE somehow hooked onto license WLM57_5_, which is a [TV "intercity relay"](https://maprad.io/us/search/licence/WLM575/system/WLM575_1_0?source=US) in Puerto Rico. How strange - I'll have to look into why this error happened later.
 
 ## QGIS: Heatmap
 
 I did some analysis of the original tower location data in QGIS (no paths).
 
-Heatmapping worked, but wasn't really interesting at all; pretty much just a population map. Though it _is_ cool to note how bright New York is compared to other cities - I wonder if that's just because it's bigger and denser, or if it's an indicator of stock market/HFT presence?
+Heatmapping worked, but wasn't really interesting at all; pretty much just a population density map. Though it _is_ cool to note how bright New York is compared to other cities - I wonder if that's just because it's bigger and denser, or if it's an indicator of stock market/HFT presence?
 
 ![image](https://user-images.githubusercontent.com/2071451/119214569-d1f01e00-ba95-11eb-80dd-b016f497463b.png)
 
 The heatmap does reveal an interesting "gap" in West Virginia, though. That spot is one of the furthest places on land from any microwave towers in the whole Eastern US (the West has plenty of gaps as it is more sparse in general). What's up with that?
 
-As it turns out, it's not just because of low population density! That gap is just a few miles from the [Green Bank Telescope](https://en.wikipedia.org/wiki/Green_Bank_Telescope), and is located very close to the center of the [National Radio Quiet Zone](https://en.wikipedia.org/wiki/United_States_National_Radio_Quiet_Zone).
+As it turns out, it's not just because of low population density! That gap is just a few miles from the [Green Bank Telescope](https://en.wikipedia.org/wiki/Green_Bank_Telescope), and is located just a bit west of the exact center of the [National Radio Quiet Zone](https://en.wikipedia.org/wiki/United_States_National_Radio_Quiet_Zone).
 
 # [7] Data
 
