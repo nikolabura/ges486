@@ -8,7 +8,9 @@ First things first. The web app can be accessed [via this link](http://umbcsad.c
 
 [<img src="https://user-images.githubusercontent.com/2071451/119211568-de1db080-ba80-11eb-88b8-1544356269b4.png">](http://umbcsad.crabdance.com/)
 
-For an explanation of how to use the app, please see the Usage section below. Source code is available at [https://github.com/nikolabura/fccle](https://github.com/nikolabura/fccle).
+For an explanation of how to use the app, please see the Usage section below.
+
+Finally, **source code is available at [https://github.com/nikolabura/fccle](https://github.com/nikolabura/fccle).**
 
 ## [2] Write-Up
 
@@ -138,3 +140,98 @@ If a static map is desired, I used the Export buttons to export the GeoJSON for 
 ![viewshed](https://user-images.githubusercontent.com/2071451/119213675-eda3f600-ba8e-11eb-854e-d599bcaef86e.png)
 
 It's cool to see how, sure enough, the microwave links almost entirely go to sites within the viewshed. The colored elevation overlay also shows how they link from one mountaintop to the other.
+
+## [6] Maps
+
+Here are some selected maps I made using the web app; I found them interesting.
+
+### Microwave Networks
+
+![hagerstown](https://user-images.githubusercontent.com/2071451/119214044-b84cd780-ba91-11eb-9f6d-cf240f956f39.png)
+
+Above, I ran Path Trace on the Hagerstown cluster and after propagating for a while, it yielded this pretty cool-looking result.
+This is one of the more proper-looking multi-node "networks" I've managed to get the app to discover.
+
+![mountaintop](https://user-images.githubusercontent.com/2071451/119214098-22fe1300-ba92-11eb-882d-dc3857bf1906.png)
+
+Above, another trace that I ran from that mountaintop next to the "86". I've found that running mass-path-traces from mountaintop sites seems
+to have the most successful and interesting results.
+I think that cities are covered in a lot of (subjectively) uninteresting short-range links while mountaintops have the long-range stuff.
+
+![elrama](https://user-images.githubusercontent.com/2071451/119214132-648ebe00-ba92-11eb-94f4-7b5aec263b3d.png)
+
+Speak of the devil: Above, next to this factory/plant in Elrama, a microwave link is used short-range to cross a river. Cheaper than a cable, I assume.
+
+## UMBC Campus Tower
+
+![image](https://user-images.githubusercontent.com/2071451/119214186-dbc45200-ba92-11eb-9e73-9245c8c10857.png)
+
+The UMBC radio tower (pictured in "Write Up" above) links to Gambrill Mountain in Frederick, callsign `WQML415` in DC, and a site in nearby Baltimore.
+
+## High-Frequency Trading
+
+_Note: I updated the database with data for the whole nation, so we can do this analysis now._
+
+HFT famously makes use of microwave links for very low-latency (and therefore very lucrative) connections to stock exchanges.
+
+The NASDAQ stock exchange data center is pretty hard to find, probably by design. We know it's [in Carteret, NJ](https://www.sec.gov/comments/4-729/4729-8131081-226476.pdf), but where, exactly? [Incredibly unreliable sources off of Google](http://wikimapia.org/27502149/NASDAQ-Carteret-Data-Center) seem to all point to this one building off the Turnpike, and sure enough, it's got antennas:
+
+![nasdaq_1](https://user-images.githubusercontent.com/2071451/119214276-8b012900-ba93-11eb-83f1-fffad33f65e1.png)
+![nasdaq_4](https://user-images.githubusercontent.com/2071451/119214279-93596400-ba93-11eb-9543-146a17509fc0.png)
+
+It's got links, too:
+
+![nasdaq_2](https://user-images.githubusercontent.com/2071451/119214286-a53b0700-ba93-11eb-8729-79d2f76af8e7.png)
+
+One of these goes to an Equinx data center much closer to NYC:
+
+![nasdaq_5](https://user-images.githubusercontent.com/2071451/119214313-e7644880-ba93-11eb-8310-efd4fdeb6857.png)
+
+But, unfortunately I wasn't able to get anything super interesting out of it. I did a few manual path traces, thinking maybe different companies (and therefore different callsigns) own different parts of the relay network, and I did manage to trace a path partway to Chicago:
+
+![nasdaq_3](https://user-images.githubusercontent.com/2071451/119214307-dc111d00-ba93-11eb-9c02-154c499310f4.png)
+
+But, for all I know, this could be total placebo. I'm not even sure if this is the right building. Still, it's pretty neat!
+
+## Government Use of Microwave Links
+
+Everything we've looked at so far has been mostly commercial. So I also checked out the Mount Weather Emergency Operations Center, a semi-famous underground FEMA site built into a mountain in Virginia. (How spooky.) It's got towers:
+
+![image](https://user-images.githubusercontent.com/2071451/119214367-58a3fb80-ba94-11eb-95f5-b253433e04a4.png)
+
+And what about links?
+
+![image](https://user-images.githubusercontent.com/2071451/119214405-a6206880-ba94-11eb-99ff-cf0906e949db.png)
+
+Upon closer inspection, paths were found to Harrisonburg (blue marker) via Mt Hogback (6), Clear Spring (5), and an AT&T [Project Office](https://en.wikipedia.org/wiki/Project_Offices) (2) by Short Hill Mountain. The (2) on the right near DC is the [Tysons Corner Communications Tower](https://en.wikipedia.org/wiki/Tysons_Corner_Communications_Tower), but why isn't it directly linked?
+
+![image](https://user-images.githubusercontent.com/2071451/119214486-42e30600-ba95-11eb-8dc0-caa45d63af22.png)
+
+The Tysons Corner Tower was discovered by the propagator since both it and Mt Weather apparently link to a site in Puerto Rico.
+I didn't even know microwave links can go that far; the Earth's curvature would definitely interfere at that point.
+I kind of assume this is a misplacement / glitch in the FCC data, but how weird.
+
+## QGIS Analysis
+
+I did some analysis of the original tower location data in QGIS (no paths).
+
+Heatmapping worked, but wasn't really interesting at all; pretty much just a population map. Though it _is_ cool to note how bright New York is compared to other cities - I wonder if that's just because it's bigger and denser, or if it's an indicator of stock market/HFT presence?
+
+![image](https://user-images.githubusercontent.com/2071451/119214569-d1f01e00-ba95-11eb-80dd-b016f497463b.png)
+
+The heatmap does reveal an interesting "gap" in West Virginia, though. That spot is one of the furthest places on land from any microwave towers in the whole Eastern US (the West has plenty of gaps as it is more sparse in general). What's up with that?
+
+As it turns out, it's not just because of low population density! That gap is just a few miles from the [Green Bank Telescope](https://en.wikipedia.org/wiki/Green_Bank_Telescope), and is located very close to the center of the [National Radio Quiet Zone](https://en.wikipedia.org/wiki/United_States_National_Radio_Quiet_Zone).
+
+# [7]
+
+- Microwave: ftp://wirelessftp.fcc.gov/pub/uls/complete/l_micro.zip
+- Paging: ftp://wirelessftp.fcc.gov/pub/uls/complete/l_paging.zip
+- DEM for Viewshed: https://lpdaacsvc.cr.usgs.gov/appeears/explore
+- Basemaps:
+    - Stamen Terrain: https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.{ext}
+    - CartoDB Positron: https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png
+    - Esri WorldImagery: https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}
+    - OpenStreetMap Mapnik: https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
+
+Source code is available at [https://github.com/nikolabura/fccle](https://github.com/nikolabura/fccle).
